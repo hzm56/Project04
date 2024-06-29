@@ -13,6 +13,9 @@
 
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +60,8 @@ public class HomeController {
 		
 		//直近の入力履歴を新しい順に最大10件表示
 		//履歴画面のメソッドを利用
+		List<String> record = new ArrayList<String>(); //メソッドに置き換え
+		model.addAttribute("record", record);
 		
 		return "home";
 	}
