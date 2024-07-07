@@ -1,5 +1,5 @@
 /*******************************************************************
-***  File Name		: ChatGPTProcess.java
+***  File Name		: PromptProcess.java
 ***  Version		: V1.0
 ***  Designer		: 菅 匠汰
 ***  Date			: 2024.06.13
@@ -17,6 +17,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PromptProcess {
+	
+    /****************************************************************************
+    *** Method Name         : generatePrompt()
+    *** Designer            : 菅 匠汰
+    *** Date                : 2024.06.13
+    *** Function            : ChatGPTに送るプロンプトを作成する
+    *** Return              : プロンプト
+    ****************************************************************************/
 	
 	public String generatePrompt(int budget) {
 		//GPTに送る文章

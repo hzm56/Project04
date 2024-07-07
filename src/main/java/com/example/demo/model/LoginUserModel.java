@@ -14,9 +14,9 @@
 package com.example.demo.model;
 
 public class LoginUserModel {
-    public String Id;
-    public String Name;
-    public String Password;
+    public int Id;
+    public String Userid;
+    public String Pass;
     
     /****************************************************************************
      *** Method Name         : getId()
@@ -25,7 +25,7 @@ public class LoginUserModel {
      *** Function            : ID取得
      *** Return              : ID
      ****************************************************************************/
-    public String getId() {
+    public int getId() {
         return Id;
     }
     
@@ -35,49 +35,49 @@ public class LoginUserModel {
      *** Date                : 2024.06.18
      *** Function            : ID挿入
      ****************************************************************************/
-    public void setId(String id) {
+    public void setId(int id) {
         Id = id;
     }
     
     /****************************************************************************
-     *** Method Name         : getName()
+     *** Method Name         : getUserid()
      *** Designer            : 堀江咲希
      *** Date                : 2024.06.18
-     *** Function            : Name取得
-     *** Return              : Name
+     *** Function            : Userid取得
+     *** Return              : Userid
      ****************************************************************************/
-    public String getName() {
-        return Name;
+    public String getUserid() {
+        return Userid;
     }
     
     /****************************************************************************
-     *** Method Name         : setName()
+     *** Method Name         : setUserid()
      *** Designer            : 堀江咲希
      *** Date                : 2024.06.18
-     *** Function            : Name挿入
+     *** Function            : Userid挿入
      ****************************************************************************/
-    public void setName(String name) {
-        Name = name;
+    public void setUserid(String name) {
+        Userid = name;
     }
     
     /****************************************************************************
-     *** Method Name         : getPassword()
+     *** Method Name         : getPass()
      *** Designer            : 堀江咲希
      *** Date                : 2024.06.18
-     *** Function            : Password取得
-     *** Return              : Password
+     *** Function            : Pass取得
+     *** Return              : Pass
      ****************************************************************************/
-    public String getPassword() {
-        return Password;
+    public String getPass() {
+        return Pass;
     }
     
     /****************************************************************************
-     *** Method Name         : setPassword()
+     *** Method Name         : setPass()
      *** Designer            : 堀江咲希
      *** Date                : 2024.06.18
-     *** Function            : Password挿入
+     *** Function            : Pass挿入
      ****************************************************************************/
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setPass(String Password) {
+        this.Pass = Password;
     }
 }
