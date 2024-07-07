@@ -1,18 +1,22 @@
 /*******************************************************************
 ***  File Name		: HomeController.java
-***  Version		: V1.0
+***  Version		: V1.1
 ***  Designer		: 菅 匠汰
-***  Date			: 2024.06.18
+***  Date			: 2024.07.04
 ***  Purpose       	: ホーム画面を表示する
 ***
 *******************************************************************/
 /*
 *** Revision :
 *** V1.0 : 菅 匠汰, 2024.06.18
+*** V1.1 : 菅 匠汰, 2024.07.04
 */
 
 package com.example.demo.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,25 +26,31 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private com.example.demo.service.HomeService homeService;
+	
 	 /****************************************************************************
 	 *** Method Name         : displayHome()
 	 *** Designer            : 菅 匠汰
-	 *** Date                : 2024.06.13
-	 *** Function            : 予算に基づいた料理のレシピを生成して表示する
-	 *** Return              : レシピ提案画面(RecipeScreen)
+	 *** Date                : 2024.07.02
+	 *** Function            : ホーム画面を表示する
+	 *** Return              : ホーム画面
 	 ****************************************************************************/
-	    
 	@GetMapping("/home")
 	public String displayHome(Model model, HttpSession session) {
-		int userId = (int) session.getAttribute("loggedInUser");
+		Object loggedInUser =  session.getAttribute("loggedInUser");
+        if (loggedInUser == null) {
+            return "redirect:/login"; //idを取得できない場合はログイン画面にリダイレクト
+        }
+        int userId = (int) loggedInUser;
 		
 		//今月の収入、支出、収支を取得するメソッドを利用
-		//数値は仮置き
-		int income = 100000;
-		int expense = 70000;
-		int balance = income - expense;
-		int target = 80000;
-		int difference = target - expense;
+		int[] homeData = homeService.getHomeData(userId);
+		int balance = homeData[0];
+		int income = homeData[1];
+		int expense = homeData[2];
+		int target = homeData[3];
+		int difference = homeData[4];
 		
 		//model.addAttributeで値をhtmlに渡す
 		model.addAttribute("userId", userId);
@@ -50,13 +60,17 @@ public class HomeController {
 		model.addAttribute("target", target);
 		model.addAttribute("difference", difference);
 		
-		
-		//今月の支出を円グラフにするメソッドを利用
-		//円グラフを出力
+		//円グラフのデータを取得
+		List<Object> sortedData = homeService.getSortedData(userId);
+		int[] chartData = (int[]) sortedData.get(0);
+		String[] chartLabels = (String[]) sortedData.get(1);
+		model.addAttribute("chartData", chartData);
+		model.addAttribute("chartLabels", chartLabels);
 		
 		
 		//直近の入力履歴を新しい順に最大10件表示
-		//履歴画面のメソッドを利用
+		List<String[]> record = homeService.getRecords(userId);
+		model.addAttribute("record", record);
 		
 		return "home";
 	}
